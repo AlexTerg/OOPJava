@@ -25,10 +25,7 @@ int EvenSearch(int[] array)
     int cnt = 0;
     foreach (var item in array)
     {
-        if (item % 2 == 0)
-        {
-            cnt++;
-        }
+        if (item % 2 == 0) cnt++;
     }
     return cnt;
 }

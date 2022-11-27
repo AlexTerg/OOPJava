@@ -16,7 +16,7 @@ void Average(int[,] array)
         {
             sum += array[j, i];
         }
-        Console.Write($"{sum / array.GetLength(0)} ");
+        Console.Write($"{Math.Round(sum / array.GetLength(0), 2)} ");
     }    
 }
 

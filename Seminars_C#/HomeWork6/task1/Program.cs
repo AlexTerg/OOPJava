@@ -8,12 +8,9 @@ int[] NumbersArray = Console.ReadLine().Split(",").Select(int.Parse).ToArray();
 int FindNumbersMoreZero(int[] array)
 {
     int cnt = 0;
-    for (int i = 0; i < array.Length; i++)
+    foreach (int item in array)
     {
-        if (array[i] > 0)
-        {
-            cnt ++;
-        }
+        if (item > 0) cnt++;
     }
     return cnt;
 }
