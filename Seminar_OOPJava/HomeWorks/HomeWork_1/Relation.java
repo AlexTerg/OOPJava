@@ -1,12 +1,34 @@
 package HomeWorks.HomeWork_1;
 
 public class Relation {
-    public int firstPeople;
-    public int secondPeople;
-    public String relationship;
+    private int firstPeople;
+    private int secondPeople;
+    private RelatEnum relationship;
 
 
-    public Relation(int firstPeople, int secondPeople, String relationship) {
+    public enum RelatEnum {
+        SON ("Сын"),
+        DAUGHTER ("Дочь"),
+        FATHER ("Отец"),
+        MOTHER ("Мать"),
+        SISTER ("Сестра"),
+        BROTHER ("Брат");
+
+        String translate;
+
+        RelatEnum(String translate) {
+            this.translate = translate;
+        }
+
+        public String getTranslate() {
+            return this.translate;
+        }
+
+    }
+    
+    
+
+    public Relation(int firstPeople, int secondPeople, RelatEnum relationship) {
         this.firstPeople = firstPeople;
         this.secondPeople = secondPeople;
         this.relationship = relationship;
@@ -30,11 +52,15 @@ public class Relation {
         this.secondPeople = secondPeople;
     }
 
-    public String getRelationship() {
+    public RelatEnum getRelationship() {
         return this.relationship;
     }
 
-    public void setRelationship(String relationship) {
+    public String getRelationshipTranslate() {
+        return this.relationship.translate;
+    }
+
+    public void setRelationship(RelatEnum relationship) {
         this.relationship = relationship;
     }
 

@@ -1,5 +1,7 @@
 package HomeWorks.HomeWork_1;
 
+import HomeWorks.HomeWork_1.Relation.RelatEnum;
+
 public class Repo {
     RepoPeople rp;
     RepoRelation rr;
@@ -31,12 +33,12 @@ public class Repo {
 
         for (Relation relation : rr.getDb()) {
             if (relation.getSecondPeople() == idPeople
-                    && (relation.getRelationship().equals("Сын") || relation.getRelationship().equals("Дочь"))) {
+                    && (relation.getRelationship().equals(RelatEnum.SON) || relation.getRelationship().equals(RelatEnum.DAUGHTER))) {
                 sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\n\n",
-                        rp.getDb().get(relation.firstPeople).getFullName(),
-                        rp.getDb().get(relation.firstPeople).getBirthday(),
-                        rp.getDb().get(relation.firstPeople).getBirthplace(),
-                        rp.getDb().get(relation.firstPeople).getGender()));
+                        rp.getDb().get(relation.getFirstPeople()).getFullName(),
+                        rp.getDb().get(relation.getFirstPeople()).getBirthday(),
+                        rp.getDb().get(relation.getFirstPeople()).getBirthplace(),
+                        rp.getDb().get(relation.getFirstPeople()).getGender()));
                 cnt++;
             }
         }
@@ -68,13 +70,48 @@ public class Repo {
 
         sb.append("РОДНЯ:\n");
         for (Relation relation : rr.getDb()) {
-            if (relation.secondPeople == idPeople) {
+            if (relation.getSecondPeople() == idPeople) {
                 sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nРодственная связь: %s\n\n",
-                rp.getDb().get(relation.firstPeople).getFullName(),
-                rp.getDb().get(relation.firstPeople).getBirthday(),
-                rp.getDb().get(relation.firstPeople).getBirthplace(),
-                rp.getDb().get(relation.firstPeople).getGender(),
-                relation.getRelationship()));
+                rp.getDb().get(relation.getFirstPeople()).getFullName(),
+                rp.getDb().get(relation.getFirstPeople()).getBirthday(),
+                rp.getDb().get(relation.getFirstPeople()).getBirthplace(),
+                rp.getDb().get(relation.getFirstPeople()).getGender(),
+                relation.getRelationshipTranslate()));
+            }
+        }
+
+        return sb;
+    }
+
+    public StringBuilder getInfo(String name, Boolean statusAlive) {
+        StringBuilder sb = new StringBuilder();
+
+        int idPeople = 0;
+        for (People people : rp.getDb()) {
+            if (people.getFullName().equals(name)) {
+                idPeople = people.getId();
+                sb.append(String.format("ИМЯ: %s\nДАТА РОЖДЕНИЯ: %s\nМЕСТО РОЖДЕНИЯ: %s\n\n", people.getFullName(),
+                        people.getBirthday(), people.getBirthplace()));
+                break;
+            }
+        }
+
+        if (sb.isEmpty()) {
+            sb.append("Человека с таким именем нет");
+            return sb;
+        }
+
+        sb.append("РОДНЯ:\n");
+        for (int i = 0; i < rr.getDb().size(); i++) {
+            int idFP = rr.getDb().get(i).getFirstPeople();
+            if (rr.getDb().get(i).getSecondPeople() == idPeople && rp.getDb().get(idFP).getStatusAlive() == statusAlive) {
+                sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nЖив: %b\nРодственная связь: %s\n\n",
+                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getFullName(),
+                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthday(),
+                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthplace(),
+                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getGender(),
+                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getStatusAlive(),
+                rr.getDb().get(i).getRelationshipTranslate()));
             }
         }
 
@@ -95,6 +132,15 @@ public class Repo {
 
     public void setRr(RepoRelation rr) {
         this.rr = rr;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " rp='" + getRp() + "'" +
+            ", rr='" + getRr() + "'" +
+            "}";
     }
 
 }

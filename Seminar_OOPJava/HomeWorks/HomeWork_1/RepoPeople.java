@@ -20,10 +20,18 @@ public class RepoPeople {
 
     public People read(String name) {
         for (People people : db) {
-            if (people.fullName.equals(name))
+            if (people.getFullName().equals(name))
                 return people;
         }
         return null;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " db='" + getDb() + "'" +
+            "}";
     }
 
 }

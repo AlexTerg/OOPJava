@@ -6,15 +6,31 @@ import java.time.LocalDate;
  * People
  */
 public class People {
-    public int id;
-    public String fullName;
-    public LocalDate birthday;
-    public String birthplace;
-    public String statusAlive;
-    public String gender;
+    private int id;
+    private String fullName;
+    private LocalDate birthday;
+    private String birthplace;
+    private Boolean statusAlive;
+    private Gender gender;
+
+    public enum Gender {
+        MALE ("Муж."),
+        FEMALE ("Жен.");
+
+        String translate;
+
+        Gender(String translate) {
+            this.translate = translate;
+        }
+
+        public String getTranslate() {
+            return this.translate;
+        }
+
+    }
 
 
-    public People(int id, String fullName, LocalDate birthday, String birthplace, String statusAlive, String gender) {
+    public People(int id, String fullName, LocalDate birthday, String birthplace, Boolean statusAlive, Gender gender) {
         this.id = id;
         this.fullName = fullName;
         this.birthday = birthday;
@@ -56,19 +72,19 @@ public class People {
         this.birthplace = birthplace;
     }
 
-    public String getStatusAlive() {
+    public Boolean getStatusAlive() {
         return this.statusAlive;
     }
 
-    public void setStatusAlive(String statusAlive) {
+    public void setStatusAlive(Boolean statusAlive) {
         this.statusAlive = statusAlive;
     }
 
     public String getGender() {
-        return this.gender;
+        return this.gender.translate;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
