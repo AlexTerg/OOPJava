@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import HomeWorks.HomeWork_1.People.Gender;
 
-public class PeopleCreator {
+public class PeopleCreator extends RepoPeople{
 
     private static PeopleCreator instance;
     People temp;
@@ -28,7 +28,7 @@ public class PeopleCreator {
         temp.setBirthday(LocalDate.of(1900, 1, 1));
         temp.setBirthplace(null);
         temp.setFullName("");
-        temp.setId(-1);
+        temp.setId(0);
         temp.setGender(null);
         temp.setStatusAlive(true);
 

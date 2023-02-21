@@ -33,7 +33,8 @@ public class Repo {
 
         for (Relation relation : rr.getDb()) {
             if (relation.getSecondPeople() == idPeople
-                    && (relation.getRelationship().equals(RelatEnum.SON) || relation.getRelationship().equals(RelatEnum.DAUGHTER))) {
+                    && (relation.getRelationship().equals(RelatEnum.SON)
+                            || relation.getRelationship().equals(RelatEnum.DAUGHTER))) {
                 sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\n\n",
                         rp.getDb().get(relation.getFirstPeople()).getFullName(),
                         rp.getDb().get(relation.getFirstPeople()).getBirthday(),
@@ -71,12 +72,13 @@ public class Repo {
         sb.append("РОДНЯ:\n");
         for (Relation relation : rr.getDb()) {
             if (relation.getSecondPeople() == idPeople) {
-                sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nРодственная связь: %s\n\n",
-                rp.getDb().get(relation.getFirstPeople()).getFullName(),
-                rp.getDb().get(relation.getFirstPeople()).getBirthday(),
-                rp.getDb().get(relation.getFirstPeople()).getBirthplace(),
-                rp.getDb().get(relation.getFirstPeople()).getGender(),
-                relation.getRelationshipTranslate()));
+                sb.append(String.format(
+                        "Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nРодственная связь: %s\n\n",
+                        rp.getDb().get(relation.getFirstPeople()).getFullName(),
+                        rp.getDb().get(relation.getFirstPeople()).getBirthday(),
+                        rp.getDb().get(relation.getFirstPeople()).getBirthplace(),
+                        rp.getDb().get(relation.getFirstPeople()).getGender(),
+                        relation.getRelationshipTranslate()));
             }
         }
 
@@ -104,14 +106,50 @@ public class Repo {
         sb.append("РОДНЯ:\n");
         for (int i = 0; i < rr.getDb().size(); i++) {
             int idFP = rr.getDb().get(i).getFirstPeople();
-            if (rr.getDb().get(i).getSecondPeople() == idPeople && rp.getDb().get(idFP).getStatusAlive() == statusAlive) {
-                sb.append(String.format("Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nЖив: %b\nРодственная связь: %s\n\n",
-                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getFullName(),
-                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthday(),
-                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthplace(),
-                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getGender(),
-                rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getStatusAlive(),
-                rr.getDb().get(i).getRelationshipTranslate()));
+            if (rr.getDb().get(i).getSecondPeople() == idPeople
+                    && rp.getDb().get(idFP).getStatusAlive() == statusAlive) {
+                sb.append(String.format(
+                        "Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nЖив: %b\nРодственная связь: %s\n\n",
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getFullName(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthday(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthplace(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getGender(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getStatusAlive(),
+                        rr.getDb().get(i).getRelationshipTranslate()));
+            }
+        }
+
+        return sb;
+    }
+
+    public StringBuilder getInfo(int id) {
+        StringBuilder sb = new StringBuilder();
+
+        for (People people : rp.getDb()) {
+            if (people.getId() == id) {
+                // idPeople = people.getId();
+                sb.append(String.format("ИМЯ: %s\nДАТА РОЖДЕНИЯ: %s\nМЕСТО РОЖДЕНИЯ: %s\n\n", people.getFullName(),
+                        people.getBirthday(), people.getBirthplace()));
+                break;
+            }
+        }
+
+        if (sb.isEmpty()) {
+            sb.append("Человека с таким именем нет");
+            return sb;
+        }
+
+        sb.append("РОДНЯ:\n");
+        for (int i = 0; i < rr.getDb().size(); i++) {
+            if (rr.getDb().get(i).getSecondPeople() == id) {
+                sb.append(String.format(
+                        "Имя: %s\nДата рождения: %s\nМесто рождения: %s\nПол: %s\nЖив: %b\nРодственная связь: %s\n\n",
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getFullName(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthday(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getBirthplace(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getGender(),
+                        rp.getDb().get(rr.getDb().get(i).getFirstPeople()).getStatusAlive(),
+                        rr.getDb().get(i).getRelationshipTranslate()));
             }
         }
 
@@ -134,13 +172,12 @@ public class Repo {
         this.rr = rr;
     }
 
-
     @Override
     public String toString() {
         return "{" +
-            " rp='" + getRp() + "'" +
-            ", rr='" + getRr() + "'" +
-            "}";
+                " rp='" + getRp() + "'" +
+                ", rr='" + getRr() + "'" +
+                "}";
     }
 
 }

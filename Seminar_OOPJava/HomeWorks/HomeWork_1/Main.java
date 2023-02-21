@@ -17,13 +17,14 @@ public class Main {
         people.addDb(new People(5, "Василий", LocalDate.of(1983, 9, 13), "Воронеж", false, Gender.MALE));
 
         People p1 = PeopleCreator
-            .getInstance()
-            .setBirthday(LocalDate.of(1990, 1, 4))
-            .setBirthplace("Брянск")
-            .setGender(Gender.MALE)
-            .setId(6)
-            .setName("Дмитрий")
-            .create();
+                .getInstance()
+                .setId(6)
+                .setBirthday(LocalDate.of(1970, 1, 4))
+                .setBirthplace("Брянск")
+                .setGender(Gender.MALE)
+                .setName("Дмитрий")
+                .create();
+
         people.addDb(p1);
 
         RepoRelation relation = new RepoRelation();
@@ -36,13 +37,32 @@ public class Main {
         relation.addDb(new Relation(5, 2, RelatEnum.DAUGHTER));
         relation.addDb(new Relation(2, 5, RelatEnum.MOTHER));
 
+        Relation rel = RelationCreator
+                    .getInstance()
+                    .setFirstPeople(6)
+                    .setRelationship(RelatEnum.FATHER)
+                    .setSecondPeople(4)
+                    .create();
+        
+        Relation rel2 = RelationCreator
+                    .getInstance()
+                    .setFirstPeople(4)
+                    .setSecondPeople(6)
+                    .setRelationship(RelatEnum.DAUGHTER)
+                    .create();
+           
+        
+        relation.addDb(rel);
+        relation.addDb(rel2);
+
         Repo repo = new Repo(people, relation);
 
         var res = repo.getChild("Александр"); // проводим иследование(получаем всех детей по имени)
         var res2 = repo.getInfo("Иван"); // иследование показывает все родственные связи по имени
         var res3 = repo.getInfo("Александр", true); // иследует всех родственников с фильтром жив или нет
-        
-     
+        var res4 = repo.getInfo(6);
+
+
         Notepad np = new Notepad();
         np.newFile();
         np.currentDocument().addText(res);
@@ -53,6 +73,8 @@ public class Main {
         System.out.println(res2);
         System.out.println();
         System.out.println(res3);
+        System.out.println();
+        System.out.println(res4);
 
     }
 }

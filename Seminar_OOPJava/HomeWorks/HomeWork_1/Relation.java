@@ -1,8 +1,8 @@
 package HomeWorks.HomeWork_1;
 
 public class Relation {
-    private int firstPeople;
-    private int secondPeople;
+    private Integer firstPeople;
+    private Integer secondPeople;
     private RelatEnum relationship;
 
 
@@ -40,7 +40,7 @@ public class Relation {
         return this.firstPeople;
     }
 
-    public void setFirstPeople(int firstPeople) {
+    public void setFirstPeople(Integer firstPeople) {
         this.firstPeople = firstPeople;
     }
 
@@ -48,7 +48,7 @@ public class Relation {
         return this.secondPeople;
     }
 
-    public void setSecondPeople(int secondPeople) {
+    public void setSecondPeople(Integer secondPeople) {
         this.secondPeople = secondPeople;
     }
 

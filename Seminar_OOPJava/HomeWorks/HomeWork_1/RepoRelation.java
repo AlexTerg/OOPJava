@@ -18,12 +18,12 @@ public class RepoRelation {
         return db.get(i);
     }
 
-    // public Relation read(String status) {
-    //     for (Relation relation : db) {
-    //         if (relation.relationship.equals(status)) return relation;
-    //     }
-    //     return null;
-    // }
+    public Relation read(String status) {
+        for (Relation relation : db) {
+            if (relation.getRelationshipTranslate().equals(status)) return relation;
+        }
+        return null;
+    }
     
 
     @Override
