@@ -27,6 +27,8 @@ public class Main {
 
         people.addDb(p1);
 
+        people.sort(new ComporatorName()); //сортировка по имени
+
         RepoRelation relation = new RepoRelation();
         relation.addDb(new Relation(1, 0, RelatEnum.SON));
         relation.addDb(new Relation(2, 0, RelatEnum.DAUGHTER));
@@ -62,6 +64,9 @@ public class Main {
         var res3 = repo.getInfo("Александр", true); // иследует всех родственников с фильтром жив или нет
         var res4 = repo.getInfo(6);
 
+        for (var p : people) { //проверка цикла
+            System.out.println(p);
+        }
 
         Notepad np = new Notepad();
         np.newFile();
