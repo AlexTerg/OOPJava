@@ -1,6 +1,6 @@
 package HomeWorks.Calculate;
 
-public class Divisin implements Result {
+public class Divisin extends Action {
 
     @Override
     public double getResult(IntNumber intNumber) {

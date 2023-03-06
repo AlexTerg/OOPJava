@@ -1,6 +1,6 @@
 package HomeWorks.Calculate;
 
-public class Diff implements Result {
+public class Diff extends Action {
 
     @Override
     public double getResult(IntNumber intNumber) {

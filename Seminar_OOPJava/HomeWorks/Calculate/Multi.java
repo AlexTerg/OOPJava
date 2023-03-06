@@ -1,6 +1,6 @@
 package HomeWorks.Calculate;
 
-public class Multi implements Result {
+public class Multi extends Action {
 
     public double getResult(IntNumber intNumber) {
         return intNumber.getFirstNumber() * intNumber.getSecondNumber();
