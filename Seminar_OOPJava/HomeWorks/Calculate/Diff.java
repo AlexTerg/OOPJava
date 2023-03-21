@@ -4,7 +4,9 @@ public class Diff extends Action {
 
     @Override
     public double getResult(IntNumber intNumber) {
-        return intNumber.getFirstNumber() - intNumber.getSecondNumber();
+        double result = intNumber.getFirstNumber() - intNumber.getSecondNumber();
+        // logger.log(String.format("%s - %s = %s", intNumber.getFirstNumber(), intNumber.getSecondNumber(), result));
+        return result;
     }
 
 }
